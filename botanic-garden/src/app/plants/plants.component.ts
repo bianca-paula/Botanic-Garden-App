@@ -10,9 +10,15 @@ import { PLANTS } from '../mock-plants';
 export class PlantsComponent implements OnInit {
   
   plants = PLANTS;
+  selectedPlant?: Plant;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onSelect(plant: Plant): void {
+    this.selectedPlant = plant;
+    console.log("PLANT: ", this.selectedPlant);
+  }
 }
