@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Plant } from '../model/plant';
-import { PLANTS } from '../mock-plants';
+import { PlantService } from '../plant.service';
 
 @Component({
   selector: 'app-plants',
@@ -9,16 +9,22 @@ import { PLANTS } from '../mock-plants';
 })
 export class PlantsComponent implements OnInit {
   
-  plants = PLANTS;
+  plants : Plant[] = [];
   selectedPlant?: Plant;
 
-  constructor() { }
+  constructor(private plantService: PlantService) { }
 
   ngOnInit(): void {
+    this.getPlants();
   }
 
   onSelect(plant: Plant): void {
     this.selectedPlant = plant;
     console.log("PLANT: ", this.selectedPlant);
+  }
+
+  getPlants(): void {
+    this.plantService.getPlants()
+        .subscribe(plants => this.plants = plants);
   }
 }
